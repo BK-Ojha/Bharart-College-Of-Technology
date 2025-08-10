@@ -63,7 +63,7 @@ export default function Notification() {
         className="bg-dark rounded-top mt-2 mb-4 p-3"
         style={{ marginBottom: '-2rem' }}
       >
-        <h3 className="text-white mb-3 ">📢 Latest Student Registrations dsfljslfjlsajd</h3>
+        <h3 className="text-white mb-3 ">📢 Latest Student Registrations</h3>
         <p className="text-warning fw-semibold">
           ⚠️ Please review and complete the profiles of newly registered
           students.
