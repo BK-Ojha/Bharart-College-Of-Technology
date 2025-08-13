@@ -35,30 +35,66 @@ function App() {
     return <Navigate to="/Login" replace />
   }
 
-  const generateBreadcrumb = (path) => {
-    const mapping = {
-      Dashboard: 'Home',
-      StudentList: 'Manage Student / Students',
-      Enquiries: 'Manage Enquiry / Enquiries',
-      CourseList: 'Manage Course / Courses',
-      SubjectList: 'Manage Course / Subjects',
-      FeesStructure: 'Manage Fees / Fees Structure',
-      ApplyFees: 'Manage Fees / Apply Fees',
-      TakeFees: 'Manage Fees / Take Fees',
-      Notification: 'Notifications',
-      UserProfile: 'User Profile',
-    }
+  // const generateBreadcrumb = (path) => {
+  //   const mapping = {
+  //     dashboard: 'Dashboard',
+  //     students: 'Manage Student / Students',
+  //     enquiries: 'Manage Enquiry / Enquiries',
+  //     courses: 'Manage Course / Courses',
+  //     subjects: 'Manage Course / Subjects',
+  //     "fees/structure": 'Manage Fees / Fees / Structure',
+  //     ApplyFees: 'Manage Fees / Apply Fees',
+  //     TakeFees: 'Manage Fees / Take Fees',
+  //     Notification: 'Notifications',
+  //     UserProfile: 'User Profile',
+  //   }
 
-    const segments = path.split('/').filter(Boolean) // Remove empty strings
-    if (segments.length === 0) return 'Home'
-    return segments
-      .map((segment, index) => {
-        if (segment === 'UserProfile' && segments[index + 1])
-          return 'User Profile'
-        return mapping[segment] || segment.replace(/([A-Z])/g, ' $1').trim()
-      })
-      .join(' / ')
+  //   const segments = path.split('/').filter(Boolean) // Remove empty strings
+  //   if (segments.length === 0) return 'Dashboard'
+  //   return segments
+  //     .map((segment, index) => {
+  //       if (segment === 'UserProfile' && segments[index + 1])
+  //         return 'User Profile'
+  //       return mapping[segment] || segment.replace(/([A-Z])/g, ' $1').trim()
+  //     })
+  //     .join(' / ')
+  // }
+
+  const generateBreadcrumb = (path) => {
+  const mapping = {
+    dashboard: 'Dashboard',
+    students: 'Manage Student / Students',
+    enquiries: 'Manage Enquiry / Enquiries',
+    courses: 'Manage Course / Courses',
+    subjects: 'Manage Course / Subjects',
+    'fees/structure': 'Manage Fees / Fees / Structure',
+    "apply/fees": 'Manage Fees / Apply / Fees',
+    "student/fees": 'Manage Fees / Student / Fees',
+    "fees/collection": 'Manage Fees / Fees / Collection',
+    "take/fees": 'Manage Fees / Take / Fees',
+    notification:
+     'Notifications',
+    "my/profile": 'My / Profile',
+  };
+
+  // Remove leading slash and make lowercase
+  const cleanPath = path.replace(/^\//, '').toLowerCase();
+
+  // Direct mapping if exists
+  if (mapping[cleanPath]) {
+    return mapping[cleanPath];
   }
+
+  // If no direct match, split and capitalize each segment
+  return cleanPath
+    .split('/')
+    .map(
+      (segment) =>
+        segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase()
+    )
+    .join(' / ');
+};
+
   return (
     <>
       <style>
@@ -120,7 +156,7 @@ function App() {
 
                 <Col xs="auto" className="d-flex flex-column align-items-end">
                   <div
-                    onClick={() => navigate('/UserProfile')}
+                    onClick={() => navigate('/my/profile')}
                     style={{ cursor: 'pointer' }}
                     className="d-flex align-items-center gap-3"
                   >
@@ -153,7 +189,7 @@ function App() {
                   </div>
 
                   <div className="text-end text-muted fw-semibold small mt-2">
-                    {generateBreadcrumb(location.pathname)}
+                    {generateBreadcrumb(location.pathname.charAt(0).toUpperCase() + location.pathname.slice(1).toUpperCase())}
                   </div>
                 </Col>
               </Row>
@@ -163,18 +199,18 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/Login" />} />
             <Route path="/Login" element={<LoginForm />} />
-            <Route path="/Notification" element={<Notification />} />
-            <Route path="/Dashboard" element={<Dashboard />} />
-            <Route path="/StudentList" element={<StudentList />} />
-            <Route path="/Enquiries" element={<Enquiries />} />
-            <Route path="/CourseList" element={<CourseList />} />
-            <Route path="/SubjectList" element={<SubjectList />} />
-            <Route path="/FeesStructure" element={<FeesStructure />} />
-            <Route path="/ApplyFees" element={<ApplyFees />} />
-            <Route path="/StudentFees" element={<StudentFees />} />
-            <Route path="/FeesCollection" element={<FeesCollection />} />
-            <Route path="/TakeFees" element={<TakeFees />} />
-            <Route path="/UserProfile/:student_id?" element={<UserProfile />} />
+            <Route path="/notification" element={<Notification />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/students" element={<StudentList />} />
+            <Route path="/enquiries" element={<Enquiries />} />
+            <Route path="/courses" element={<CourseList />} />
+            <Route path="/subjects" element={<SubjectList />} />
+            <Route path="/fees/structure" element={<FeesStructure />} />
+            <Route path="/apply/fees" element={<ApplyFees />} />
+            <Route path="/student/fees" element={<StudentFees />} />
+            <Route path="/fees/collection" element={<FeesCollection />} />
+            <Route path="/take/fees" element={<TakeFees />} />
+            <Route path="/my/profile/:student_id?" element={<UserProfile />} />
           </Routes>
         </div>
       </div>

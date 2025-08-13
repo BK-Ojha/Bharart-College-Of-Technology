@@ -27,11 +27,11 @@ export default function SideNavbar() {
 
   return (
     <div
-      className="d-flex flex-column vh-100 p-3 bg-dark"
+      className="d-flex flex-column vh-100  bg-dark"
       style={{ width: '280px' }}
     >
       <div
-        onClick={() => navigate('/Dashboard')}
+        onClick={() => navigate('/dashboard')}
         className="d-flex justify-content-center align-items-center w-100 "
       >
         <img
@@ -47,11 +47,13 @@ export default function SideNavbar() {
       </div>
 
       <hr style={{ color: 'white' }} />
-      <ul className="nav nav-pills flex-column mb-auto">
+     <div style={{height:"80%", overflowY:"auto", marginBottom:"20px",scrollbarWidth:"none",     msOverflowStyle: "none" // IE/Edge
+}}>
+       <ul className="nav nav-pills flex-column mb-auto">
         {user?.role === 'admin' && (
           <li className="nav-item">
             <a
-              href="/Notification"
+              href="/notification"
               // className="nav-link text-white"
               className={`nav-link ${count > 0 ? 'text-danger' : 'text-white'}`}
               aria-current="page"
@@ -61,12 +63,11 @@ export default function SideNavbar() {
             </a>
           </li>
         )}
-        <hr style={{ color: 'white' }} />
 
         {user?.role === 'admin' && (
           <li className="nav-item">
             <a
-              href="/Dashboard"
+              href="/dashboard"
               className="nav-link text-white"
               aria-current="page"
             >
@@ -75,7 +76,6 @@ export default function SideNavbar() {
           </li>
         )}
 
-        <hr style={{ color: 'white' }} />
 
         {/* Student Management */}
         {(user?.role !== 'student' || user?.role === 'admin') && (
@@ -86,17 +86,16 @@ export default function SideNavbar() {
             >
               <FaUserGraduate /> Manage Students
             </button>
-            <hr style={{ color: 'white' }} />
-
+    
             {openMenu === 'students' && (
               <div>
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small text-center">
                   <li>
                     <a
-                      href="/StudentList"
+                      href="/students"
                       className="link-white text-white nav-link ps-4"
                     >
-                      <MdSend /> Student
+                      Student
                     </a>
                    
                   </li>
@@ -115,34 +114,26 @@ export default function SideNavbar() {
             >
               <FaBookOpen /> Manage Courses
             </button>
-            <hr style={{ color: 'white' }} />
-
+    
             {openMenu === 'courses' && (
               <div>
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small text-center">
                   <li>
                     <a
-                      href="/CourseList"
+                      href="/courses"
                       className="link-white text-white nav-link ps-4"
                     >
-                      <MdSend /> Courses
+                      Courses
                     </a>
-                    <hr
-                      style={{
-                        color: 'white',
-                        textAlign: 'end',
-                        maxWidth: '65%',
-                        margin: '0 auto',
-                      }}
-                    />
+                   
                   </li>
 
                   <li>
                     <a
-                      href="/SubjectList"
+                      href="/subjects"
                       className="link-white text-white nav-link ps-4"
                     >
-                      <MdSend /> Subjects
+                      Subjects
                     </a>
                    
                   </li>
@@ -160,81 +151,52 @@ export default function SideNavbar() {
               <FaRupeeSign />
               Manage Fees
             </button>
-            <hr style={{ color: 'white' }} />
-
+    
             {openMenu === 'fees' && (
               <div>
-                <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small text-center justify-content-start">
+                <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small justify-content-start">
                   <li>
                     <a
-                      href="/FeesStructure"
+                      href="/fees/structure"
                       className="link-white text-white nav-link ps-4"
                     >
-                      <MdSend /> Fees Structure
+                      Fees Structure
                     </a>
-                    <hr
-                      style={{
-                        color: 'white',
-                        textAlign: 'end',
-                        maxWidth: '65%',
-                        margin: '0 auto',
-                      }}
-                    />
+                   
                   </li>
                   <li>
                     <a
-                      href="/ApplyFees"
+                      href="/apply/fees"
                       className="link-white text-white nav-link ps-4"
                     >
-                    <MdSend /> Apply Fees
+                    Apply Fees
                     </a>
-                    <hr
-                      style={{
-                        color: 'white',
-                        textAlign: 'end',
-                        maxWidth: '65%',
-                        margin: '0 auto',
-                      }}
-                    />
+                   
                   </li>
                   <li>
                     <a
-                      href="/StudentFees"
+                      href="/student/fees"
                       className="link-white text-white nav-link ps-4"
                     >
-                      <MdSend /> Student Fees
+                      Student Fees
                     </a>                 
                   </li>
                   <li>
-                  <hr
-                      style={{
-                        color: 'white',
-                        textAlign: 'end',
-                        maxWidth: '65%',
-                        margin: '0 auto',
-                      }}
-                    />
+                 
                   </li>
                   <li>
                     <a
-                      href="/FeesCollection"
+                      href="/fees/collection"
                       className="link-white text-white nav-link ps-4"
                     >
-                      <MdSend /> Fees Collection
+                      Fees Collection
                     </a>  
-                     <hr
-                      style={{
-                        color: 'white',
-                        textAlign: 'end',
-                        maxWidth: '65%',
-                        margin: '0 auto',
-                      }}
-                    />  
+                      
                   </li>
                 
                   <li>
-                    <a href='/Take Fees' className='link-white text-white nav-link ps-4'>
-                      <MdSend/> Take Fees
+                    <a href='/take/fees' className='link-white text-white nav-link ps-4' style={{marginBottom:"-20px"}}>
+                      Take Fees
                     </a>'
                   </li>
                 </ul>
@@ -242,20 +204,20 @@ export default function SideNavbar() {
             )}
           </li>
         )}
-        <li className="nav-item ">
+        <li className="nav-item " >
           <a
-            href="/UserProfile"
+            href="/my/profile"
             className="nav-link text-white"
             aria-current="page"
           >
             <FaCog /> Setting
           </a>
-          <hr style={{ color: 'white' }} />
         </li>
         <li className="nav-item">
           <Login />
         </li>
       </ul>
+     </div>
     </div>
   )
 }

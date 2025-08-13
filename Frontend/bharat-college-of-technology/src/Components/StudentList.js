@@ -257,7 +257,7 @@ export default function StudentList() {
                         title="Update student info"
                         className="link-warning fw-semibold text-decoration-none"
                         onClick={() => {
-                          navigate(`/UserProfile/${student._id}`)
+                          navigate(`/my/profile/${student._id}`)
                           console.log(
                             'student_id from StudentList',
                             student._id,

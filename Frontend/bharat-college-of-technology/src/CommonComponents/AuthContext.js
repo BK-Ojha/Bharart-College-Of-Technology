@@ -115,10 +115,10 @@ export const AuthProvider = ({ children }) => {
           )
         }
         if (user.role === 'admin') {
-          navigate('/Dashboard')
+          navigate('/dashboard')
         }
         if (user.role === 'student') {
-          navigate('/UserProfile')
+          navigate('/my/profile')
         }
 
         return { status, message }
